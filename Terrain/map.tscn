@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ulyv6hidtvnj"]
+
+[node name="Map" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="floor" type="CSGBox3D" parent="CSGCombiner3D"]
