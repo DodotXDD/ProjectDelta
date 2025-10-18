@@ -1,4 +1,2 @@
 res://Demo/demo_multiplayer.tscn
-res://scripts/demo/demo_player.gd
-res://Demo/player.tscn
-res://scripts/globals/event_system.gd
+res://scripts/demo/demo_multiplayer.gd

@@ -14,6 +14,7 @@ var peer = ENetMultiplayerPeer.new()
 
 func _ready() -> void:
 	EventSystem.exitGame.connect(exit_game)
+	print("Connected to exitGame signal")
 
 func _on_host_pressed() -> void:
 	peer.create_server(PORT, MAX_CLIENTS)
@@ -38,6 +39,7 @@ func add_player(id = 1):
 	
 func exit_game(id):
 	multiplayer.peer_disconnected.connect(delete_player)
+	print("Exiting player id:", id)
 	delete_player(id)
 	
 func delete_player(id):
