@@ -24,6 +24,7 @@ var gravity = 12
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 
 func _unhandled_input(event):
@@ -34,6 +35,10 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta):
+	# testing to escape the game: to quit
+	escGame();
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -79,3 +84,8 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
+
+
+func escGame():
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()

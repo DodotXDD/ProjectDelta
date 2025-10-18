@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://by2jfgytvotof"]
+
+[ext_resource type="PackedScene" uid="uid://d01ngpy84twvd" path="res://Terrain/Terrian.glb" id="1_io8ue"]
+[ext_resource type="Script" uid="uid://tn7ev6mk44c4" path="res://scripts/demo/demo_multiplayer.gd" id="1_wc1sc"]
+[ext_resource type="PackedScene" uid="uid://cx87o06yaivhf" path="res://Demo/player.tscn" id="3_wc1sc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ikky"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_tlwt5"]
+sky_material = SubResource("ProceduralSkyMaterial_2ikky")
+
+[sub_resource type="Environment" id="Environment_vo0y3"]
+background_mode = 2
+sky = SubResource("Sky_tlwt5")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
+albedo_color = Color(0, 0.6516062, 0.91959554, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_koljp"]
+material = SubResource("StandardMaterial3D_036b0")
+size = Vector2(1000, 1000)
+
+[node name="demo_multiplayer" type="Node3D"]
+script = ExtResource("1_wc1sc")
+player_scene = ExtResource("3_wc1sc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vo0y3")
+
+[node name="Terrian" parent="." instance=ExtResource("1_io8ue")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -135.92557, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -120.96434, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_koljp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Host" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Host"
+
+[node name="Join" type="Button" parent="CanvasLayer"]
+offset_top = 37.0
+offset_right = 38.0
+offset_bottom = 68.0
+text = "Join"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cx87o06yaivhf")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/Join" to="." method="_on_join_pressed"]
