@@ -41,6 +41,8 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	# multiplayer authority
+	if !is_multiplayer_authority():
+		return
 	
 	if is_multiplayer_authority():
 		# testing to escape the game: to quit
