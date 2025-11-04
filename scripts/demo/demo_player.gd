@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Player
+class_name DemoPlayer
 
 var speed
 const WALK_SPEED = 5.0
@@ -19,8 +19,8 @@ const FOV_CHANGE = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 12
 
-@onready var head = $Head
-@onready var camera = $Head/Camera3D
+@onready var head: Node3D = $Head
+@onready var camera: Camera3D = $Head/Camera3D
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
@@ -41,10 +41,10 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	# multiplayer authority
+	
 	if is_multiplayer_authority():
 		# testing to escape the game: to quit
 		escGame();
-		
 		
 		# Add the gravity.
 		if not is_on_floor():
@@ -96,4 +96,3 @@ func _headbob(time) -> Vector3:
 func escGame():
 	if Input.is_action_just_pressed("ui_cancel"):
 		EventSystem.exitGame.emit(name.to_int())
-		get_tree().quit()

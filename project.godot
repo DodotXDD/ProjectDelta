@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="Game Jam"
-run/main_scene="uid://8xrfbs8qrsov"
+run/main_scene="uid://dq6gw0hfvbp2y"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 EventSystem="*res://scripts/globals/event_system.gd"
+MusicController="*res://Demo/globalscene/music_controller.tscn"
+GlobalLoader="*res://scripts/globals/GlobalLoader.gd"
 
 [input]
 

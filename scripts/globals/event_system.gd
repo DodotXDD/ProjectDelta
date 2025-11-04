@@ -4,3 +4,5 @@ extends Node
 
 ## player exit game
 signal exitGame(id)
+#signal toggledHost()
+#signal toggleClient()

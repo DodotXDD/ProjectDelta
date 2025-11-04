@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cimk60e2m2gi"]
+
+[ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_g5nyl"]
+[ext_resource type="Script" uid="uid://cactlv66kpwbj" path="res://scripts/demo/player_card.gd" id="1_km8f2"]
+
+[node name="player_card" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+script = ExtResource("1_km8f2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_g5nyl")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Player"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Ready"

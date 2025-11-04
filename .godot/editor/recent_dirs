@@ -1,3 +1,6 @@
-res://scripts/globals
 res://scripts/demo
+res://scripts/globals
+res://scripts/menu
+res://scripts/loading
+res://Demo/globalscene
 res://Demo

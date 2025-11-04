@@ -1,2 +1,7 @@
-res://Demo/demo_multiplayer.tscn
+res://Demo/lobby.tscn
+res://scripts/demo/lobby.gd
+res://Demo/player_card.tscn
 res://scripts/demo/demo_multiplayer.gd
+res://scripts/demo/player_card.gd
+res://Demo/demo_multiplayer.tscn
+res://scripts/demo/demo_player.gd

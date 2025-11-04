@@ -1,5 +1,13 @@
+Button
+MultiplayerSpawner
+Label
+TextureRect
+VBoxContainer
+HBoxContainer
+CenterContainer
+MarginContainer
+LineEdit      - Matches the "input" keyword.
+Panel
 Node3D
 MultiplayerSynchronizer
-MultiplayerSpawner
-Button
 CanvasLayer

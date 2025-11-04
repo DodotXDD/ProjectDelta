@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://kxtl0wnmc7oq"]
+
+[ext_resource type="Script" uid="uid://cn4ucfctk2j10" path="res://scripts/demo/lobby.gd" id="1_aucbb"]
+[ext_resource type="PackedScene" uid="uid://cimk60e2m2gi" path="res://Demo/player_card.tscn" id="2_mnkpv"]
+
+[node name="Lobby" type="Control" node_paths=PackedStringArray("host_controls", "start_button", "quit_button", "hbox_player_cards")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aucbb")
+host_controls = [NodePath("Centered/Controls/StartGame")]
+start_button = NodePath("Centered/Controls/StartGame")
+quit_button = NodePath("Centered/Controls/QuitGame")
+player_card = ExtResource("2_mnkpv")
+hbox_player_cards = NodePath("Centered/PlayerCards")
+
+[node name="TitleMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_right = 55.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="TitleMargin/VBoxContainer"]
+layout_mode = 2
+text = "Waiting Lobby"
+horizontal_alignment = 1
+
+[node name="Centered" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -20.0
+offset_right = 96.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerCards" type="HBoxContainer" parent="Centered"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PlayerCardSpawner" type="MultiplayerSpawner" parent="Centered/PlayerCards"]
+_spawnable_scenes = PackedStringArray("uid://cimk60e2m2gi")
+spawn_path = NodePath("..")
+
+[node name="Controls" type="HBoxContainer" parent="Centered"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartGame" type="Button" parent="Centered/Controls"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="QuitGame" type="Button" parent="Centered/Controls"]
+layout_mode = 2
+text = "Quit Game"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

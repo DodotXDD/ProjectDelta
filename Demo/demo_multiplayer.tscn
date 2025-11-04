@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://by2jfgytvotof"]
+[gd_scene load_steps=10 format=3 uid="uid://by2jfgytvotof"]
 
 [ext_resource type="PackedScene" uid="uid://d01ngpy84twvd" path="res://Terrain/Terrian.glb" id="1_io8ue"]
 [ext_resource type="Script" uid="uid://tn7ev6mk44c4" path="res://scripts/demo/demo_multiplayer.gd" id="1_wc1sc"]
 [ext_resource type="PackedScene" uid="uid://cx87o06yaivhf" path="res://Demo/player.tscn" id="3_wc1sc"]
+[ext_resource type="Script" uid="uid://53jxumd72cui" path="res://scripts/demo/ui.gd" id="4_2ikky"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ikky"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,9 +24,14 @@ albedo_color = Color(0, 0.6516062, 0.91959554, 1)
 material = SubResource("StandardMaterial3D_036b0")
 size = Vector2(1000, 1000)
 
-[node name="demo_multiplayer" type="Node3D"]
+[node name="demo_multiplayer" type="Node3D" node_paths=PackedStringArray("UI")]
 script = ExtResource("1_wc1sc")
 player_scene = ExtResource("3_wc1sc")
+UI = NodePath("UI")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cx87o06yaivhf")
+spawn_path = NodePath("..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -42,22 +48,49 @@ transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -120.96434, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_koljp")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_2ikky")
 
-[node name="Host" type="Button" parent="CanvasLayer"]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="Panel" type="Panel" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -96.5
+offset_right = 81.5
+offset_bottom = 96.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel"]
+layout_mode = 0
+offset_right = 162.0
+offset_bottom = 171.0
+
+[node name="Host" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
 text = "Host"
 
-[node name="Join" type="Button" parent="CanvasLayer"]
-offset_top = 37.0
-offset_right = 38.0
-offset_bottom = 68.0
+[node name="Join" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
 text = "Join"
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cx87o06yaivhf")
-spawn_path = NodePath("..")
+[node name="IPInput" type="LineEdit" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "IP Address"
 
-[connection signal="pressed" from="CanvasLayer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="CanvasLayer/Join" to="." method="_on_join_pressed"]
+[node name="PortInput" type="LineEdit" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Port"
+
+[node name="UsernameInput" type="LineEdit" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Username"
+
+[connection signal="toggleClient" from="." to="UI" method="_on_demo_multiplayer_toggle_client"]
+[connection signal="toggledHost" from="." to="UI" method="_on_demo_multiplayer_toggled_host"]
+[connection signal="pressed" from="UI/Panel/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Panel/VBoxContainer/Join" to="." method="_on_join_pressed"]
