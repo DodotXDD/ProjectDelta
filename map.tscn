@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://crh028ktyf6ma"]
+
+[ext_resource type="Texture2D" uid="uid://b6atjduo6tn75" path="res://assist/Texture/ground.png" id="2_e0an3"]
+[ext_resource type="PackedScene" uid="uid://b7j4vxohlinfx" path="res://assist/bush.tscn" id="2_urblq"]
+[ext_resource type="Script" uid="uid://d05oxjicrkvrf" path="res://Player.gd" id="3_e0an3"]
+[ext_resource type="Texture2D" uid="uid://d0mqa66nio33k" path="res://assist/Texture/ground_n.png" id="3_p5pve"]
+[ext_resource type="MeshLibrary" uid="uid://b83fccw3vvude" path="res://assist/tree_mesh.tres" id="4_p5pve"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e6lj2"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_c7s6e"]
+sky_material = SubResource("ProceduralSkyMaterial_e6lj2")
+
+[sub_resource type="Environment" id="Environment_wijl4"]
+background_mode = 2
+sky = SubResource("Sky_c7s6e")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sb2pt"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0t07s"]
+points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4760704, 0.49888408, 0.16971254, 0.5591441, 0.46417162, 0.23105091, -0.8035912, 0.32045516, 0.40741014, 0.651043, -0.24352328, -0.4827893, 0.59484255, 0.082213186, -0.3628679, -0.68231165, 0.2896967, 0.46904355, -0.65452886, -0.06627126, -0.12744367, 0.8427015, -0.33810276, -0.39343542, -0.6839421, -0.24471663, 0.43825462, 0.62330925, 0.20084947, 0.0841477, 0.977454, 0.11479468, -0.06820232, -0.9764576, -0.12927033, 0.20054972, -0.56312895, -0.4514544, -0.18552664, 0.59545326, -0.4534751, -0.27336287, 0.59226835, 0.40775412, -0.0069364863, -0.47682306, 0.49966025, 0.37582088, -0.5886136, 0.31695515, 0.111579016, 0.5630594, -0.48117727, -0.41725034, 0.5278656, -0.27049688, -0.48454633, -0.59697217, -0.06650971, -0.27974695, 0.90856135, 0.05333608, -0.25019687, -0.8807117, 0.20531891, 0.263647, -0.90277094, -0.1273943, 0.29336792, 0.8715263, -0.15719566, 0.3734115, -0.5263189, -0.32824618, 0.4996626, 0.47664148, -0.0068885577, 0.053105574, 0.8750009, 0.32470253, -0.15454252, -0.5908538, 0.4658794, -0.09727988, -0.7823577, -0.39818847, -0.3876489, -0.49817133, 0.31564978, -0.30067965, -0.58799505, -0.38890144)
+
+[sub_resource type="Gradient" id="Gradient_iw27f"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_71pa8"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_05x41"]
+noise = SubResource("FastNoiseLite_71pa8")
+color_ramp = SubResource("Gradient_iw27f")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_bc25s"]
+_shader_parameters = {
+&"bias_distance": null,
+&"blend_sharpness": null,
+&"depth_blur": null,
+&"enable_macro_variation": null,
+&"enable_projection": null,
+&"flat_terrain_normals": null,
+&"macro_variation1": null,
+&"macro_variation2": null,
+&"macro_variation_slope": null,
+&"mipmap_bias": null,
+&"noise1_angle": null,
+&"noise1_offset": null,
+&"noise1_scale": null,
+&"noise2_scale": null,
+&"noise_texture": SubResource("NoiseTexture2D_05x41"),
+&"projection_threshold": null
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqbix"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_oysan"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_gqbix")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_iw27f"]
+name = "bush"
+id = 1
+scene_file = ExtResource("2_urblq")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_sb2pt"]
+name = "ground"
+albedo_texture = ExtResource("2_e0an3")
+normal_texture = ExtResource("3_p5pve")
+uv_scale = 2.0
+detiling_rotation = 0.091
+detiling_shift = 0.067
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_0t07s"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_oysan"), SubResource("Terrain3DMeshAsset_iw27f")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_sb2pt")])
+
+[node name="Map" type="Node3D" unique_id=1655478722]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=190414500]
+environment = SubResource("Environment_wijl4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1799517143]
+transform = Transform3D(-0.7207278, 0.6483037, -0.24546643, -0.6685469, -0.556416, 0.49340278, 0.18329343, 0.51971495, 0.83444583, -1.3434577, 50.15264, 138.81732)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1633721492]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26.296158, 1.1, 30.719048)
+script = ExtResource("3_e0an3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1826457485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.047409534, 0)
+mesh = SubResource("CapsuleMesh_sb2pt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1333821490]
+shape = SubResource("ConvexPolygonShape3D_0t07s")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1903664427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59456253, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=1452043108]
+
+[node name="Terrain3D" type="Terrain3D" parent="." unique_id=1414614959]
+data_directory = "res://Terrain"
+material = SubResource("Terrain3DMaterial_bc25s")
+assets = SubResource("Terrain3DAssets_0t07s")
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1494972192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02, 0)
+mesh_library = ExtResource("4_p5pve")
+data = {
+"cells": PackedInt32Array(6, 2, 0, 3, 2, 0, 2, 5, 0, 0, 3, 0, 0, 0, 0, 5, 0, 0, 2, 0, 0, 0, 6, 0, 0, 9, 0, 10, 2, 0, 8, 1, 0, 14, 1, 0, 10, 0, 0, 12, 1, 0, 17, 1, 0, 22, 2, 0, 20, 1, 0, 15, 2, 0, 18, 3, 0, 4, 4, 0, 3, 8, 0, 2, 10, 0, 1, 10, 0, 0, 12, 0, 2, 12, 0, 21, 3, 0, 24, 1, 0, 28, 1, 0, 25, 2, 0, 26, 2, 0, 26, 1, 0, 30, 0, 0, 32, 1, 0, 29, 3, 0, 2, 14, 0, 2, 16, 0, 2, 7, 0, 0, 19, 0, 2, 18, 0, 3, 16, 0, 4, 13, 0, 5, 19, 0, 0, 15, 0, 65535, 17, 0, 65534, 13, 0, 16, 4, 0, 12, 4, 0, 0, 22, 0, 1, 21, 0, 2, 21, 0, 0, 25, 0)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
